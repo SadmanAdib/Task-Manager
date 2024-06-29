@@ -118,6 +118,7 @@ class TaskDetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         configureView(with: task)
+        setupGestureRecognizers()
     }
 
     private func setupView() {
@@ -185,6 +186,15 @@ class TaskDetailViewController: UIViewController {
         nameTextField.text = task.name
         detailTextView.text = task.detail
         dueDatePicker.date = task.dueOn
+    }
+
+    private func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 
     @objc private func editTask() {
